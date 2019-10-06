@@ -13,12 +13,13 @@ public class GetDBData {
 	GetDBData(){
 		 bean=new DBbean("postgres");
 	}
-	public  List get_prime(){
+	public  List get_prime(String sql){
 		System.out.println("prime3yi");
 		List list1=new ArrayList();
 		try{								
 				ResultSet rs;
-	  	 		rs=bean.executeQuery("select p from prime3yi limit 26");
+				//sql="select p from prime3yi limit 26";
+	  	 		rs=bean.executeQuery(sql);
 				while(rs.next()){
 					//String p=rs.getString(1).trim();
 					int p=rs.getInt(1);
@@ -38,7 +39,8 @@ public class GetDBData {
 	}
 	public static void main(String args[]){
 		GetDBData g=new GetDBData();
-		List list2=g.get_prime();
+		String sql="select p from prime3yi limit 26";
+		List list2=g.get_prime(sql);
 		g.close();
 		System.out.println("list2="+list2);
 		int prime_n=list2.size();
